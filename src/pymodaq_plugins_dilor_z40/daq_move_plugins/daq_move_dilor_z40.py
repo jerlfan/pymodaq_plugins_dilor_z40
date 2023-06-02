@@ -138,7 +138,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
 
         ## TODO for your custom plugin
 
-
         #raise NotImplemented  # when writing your own plugin remove this line
         self.controller.move_at(value)  # when writing your own plugin replace this line
         self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
@@ -154,7 +153,7 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
         """
         #value= self.check_bound(self.current_position+value)-self.current_position
         #self.target_value= value+self.current_position
-    #    value=self.set_position_relative_with_scaling(value)
+        value=self.set_position_relative_with_scaling(value)
 
         self.controller.move_rel(value)  # when writing your own plugin replace this line
         self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
@@ -174,7 +173,7 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
       """Stop the actuator and emits move_done signal"""
 
       ## TODO for your custom plugin
-      move_abs(0)
+      self.move_abs(0)
       #raise NotImplemented  # when writing your own plugin remove this line
       #self.controller.your_method_to_stop_positioning()  # when writing your own plugin replace this line
       #self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
