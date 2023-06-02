@@ -15,8 +15,13 @@ pymodaq_plugins_template (??? Instruments)
    :target: https://github.com/PyMoDAQ/pymodaq_plugins_thorlabs
    :alt: Publication Status
 
-Set of PyMoDAQ plugins for instruments from ???
+This repository contains various hardware plugins compatible with PyMoDAQ
 
+For an exhaustive list of the available plugins, see https://github.com/CEMES-CNRS/pymodaq_plugin_manager/blob/main/pymodaq_plugin_manager/doc/PluginList.md
+
+GitHub repo: https://github.com/jerlfan
+
+Documentation: http://pymodaq.cnrs.fr/
 
 Authors
 =======
@@ -29,22 +34,24 @@ Authors
     Contributors
     ============
 
-    * First Contributor
-    * Other Contributors
+    * First Contributor: Jérémie Margueritat
+    * Other Contributors: Naomie De Araujo, Sébastien Weber
 
 Instruments
 ===========
 
-Below is the list of instruments included in this plugin
+5 gratings monochromator spectrometer (DILOR Z40)
 
 Actuators
 +++++++++
+*Big Easy Stepper controlled by Arduino
 
 * **yyy**: control of yyy actuators
 * **xxx**: control of xxx actuators
 
 Viewer0D
 ++++++++
+*Optical ruler
 
 * **yyy**: control of yyy 0D detector
 * **xxx**: control of xxx 0D detector
@@ -65,5 +72,10 @@ Viewer2D
 
 Infos
 =====
+This repository contains various hardware plugins compatible with PyMoDAQ
 
-if needed for installation or other infos
+For an exhaustive list of the available plugins, see https://github.com/CEMES-CNRS/pymodaq_plugin_manager/blob/main/pymodaq_plugin_manager/doc/PluginList.md
+
+GitHub repo: https://github.com/jerlfan
+
+Documentation: http://pymodaq.cnrs.fr/

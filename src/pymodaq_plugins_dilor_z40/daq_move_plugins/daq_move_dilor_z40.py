@@ -84,10 +84,13 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
             A given parameter (within detector_settings) whose value has been changed by the user
         """
         ## TODO for your custom plugin
-        if param.name() == self.settings.child(('accel')):
-            self.controller.accel_set(self.settings.child(('accel')).value())
-        elif param.name() == self.settings.child(('maxspeed')):
-            self.controller.max_speed_set(self.settings.child(('maxspeed')).value())
+        self.controller.accel_set(self.settings.child(('accel')).value())
+        self.controller.max_speed_set(self.settings.child(('maxspeed')).value())
+
+        if param.name() == 'accel':
+            self.controller.accel_set(self.settings['accel'])
+        elif param.name() == 'maxspeed':
+            self.controller.max_speed_set(self.settings['maxspeed'])
 
 
     def ini_stage(self, controller=None):
@@ -111,6 +114,10 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
         #self.controller = ActuatorWrapper()
         self.ini_stage_init(old_controller=controller, new_controller=ActuatorWrapper())
         self.controller.open_communication(self.settings.child(('comport')).value())
+
+        self.controller.accel_set(self.settings.child(('accel')).value())
+        self.controller.max_speed_set(self.settings.child(('maxspeed')).value())
+
         info = "Connected"
         initialized = True #self.controller.a_method_or_atttribute_to_check_if_init()  # todo
         return info, initialized
@@ -124,7 +131,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
         ----------
         value: (float) value of the absolute target positioning
         """
-
         value = self.check_bound(value)  #if user checked bounds, the defined bounds are applied here
         self.target_value = value
         value = self.set_position_with_scaling(value)  # apply scaling if the user specified one
@@ -132,8 +138,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
 
         ## TODO for your custom plugin
 
-        self.controller.accel_set(self.settings.child(('accel')).value())
-        self.controller.max_speed_set(self.settings.child(('maxspeed')).value())
 
         #raise NotImplemented  # when writing your own plugin remove this line
         self.controller.move_at(value)  # when writing your own plugin replace this line
@@ -148,8 +152,10 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
         ----------
         value: (float) value of the relative target positioning
         """
-        self.controller.accel_set(self.settings.child(('accel')).value())
-        self.controller.max_speed_set(self.settings.child(('maxspeed')).value())
+        #value= self.check_bound(self.current_position+value)-self.current_position
+        #self.target_value= value+self.current_position
+    #    value=self.set_position_relative_with_scaling(value)
+
         self.controller.move_rel(value)  # when writing your own plugin replace this line
         self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
@@ -158,18 +164,20 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
         """Call the reference method of the controller"""
 
         ## TODO for your custom plugin
-        raise NotImplemented  # when writing your own plugin remove this line
-        self.controller.your_method_to_get_to_a_known_reference()  # when writing your own plugin replace this line
-        self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
+        self.move_abs(0)
+        #raise NotImplemented  # when writing your own plugin remove this line
+        #self.controller.move_at(0)  # when writing your own plugin replace this line
+        #self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
 
     def stop_motion(self):
       """Stop the actuator and emits move_done signal"""
 
       ## TODO for your custom plugin
-      raise NotImplemented  # when writing your own plugin remove this line
-      self.controller.your_method_to_stop_positioning()  # when writing your own plugin replace this line
-      self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
+      move_abs(0)
+      #raise NotImplemented  # when writing your own plugin remove this line
+      #self.controller.your_method_to_stop_positioning()  # when writing your own plugin replace this line
+      #self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
 
 if __name__ == '__main__':

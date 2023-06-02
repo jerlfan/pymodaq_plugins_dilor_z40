@@ -34,6 +34,23 @@ class ActuatorWrapper:
 
         return True
 
+    def current_position_callback(data):
+        print(f'pos {data[2]}\n')
+        global status
+        status = data[2]
+
+    def target_position_callback(data):
+        print(f'target_position_callback returns {data[2]}')
+
+    def distance_to_go_callback(data):
+        print(f'distance_to_go_callback returns {data[2]}\n')
+
+    def is_running_callback(data):
+        global running
+        running = data[1]
+        return running
+
+        print(f'is_running_callback returns {data[1]}\n')
 
     def the_callback(data):
         date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data[2]))
@@ -108,6 +125,7 @@ class ActuatorWrapper:
      #   self.device.stepper_stop(self.motor)
 
     def current_position_callback(data):
+        global status
         print(f'current_position_callback returns {data[2]}\n')
         return data[2]
     def get_value(self):
@@ -119,6 +137,7 @@ class ActuatorWrapper:
         """
         #self.device.stepper_get_current_position(self.motor, ActuatorWrapper.current_position_callback)
         #self._current_value = self.ruler.get_axis_position(1)+5899.42
+        #self._current_value=self.device.stepper_get_current_position(self.motor,ActuatorWrapper.current_position_callback)
         return self._current_value
 
     def close_communication(self):
