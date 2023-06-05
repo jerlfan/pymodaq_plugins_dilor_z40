@@ -42,7 +42,7 @@ class ActuatorWrapper:
         self.running = data[1]
         print(f'is_running_callback returns {data[1]}\n')
 
-    def the_callback(self,data):
+    def the_callback(self, data):
         date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(data[2]))
         print(f'Motor {data[1]} absolute motion completed at: {date}.')
 
@@ -68,38 +68,6 @@ class ActuatorWrapper:
             self.get_value()
         # self._start_time = perf_counter()
         self._moving = True
-        #self._current_value = value
-
-    def move_rel(self, value):
-        """
-        Send a call to the actuator to move at the given value
-        Parameters
-        ----------
-        value: (float) the target value
-        """
-        self._target_value = self._current_value + value
-        self._init_value = self._current_value
-        n_steps = round(value)
-        
-        self.device.stepper_move(self.motor, n_steps)
-        self.device.stepper_run(self.motor, completion_callback=self.the_callback)
-        self.device.stepper_is_running(self.motor, self.is_running_callback)
-
-        time.sleep(0.01)
-        while self.running == 1:
-            time.sleep(0.01)
-            self.device.stepper_is_running(self.motor, self.is_running_callback)
-            time.sleep(0.01)
-            self.get_value()
-
-
-        # self._start_time = perf_counter()
-
-
-
-        self._moving = True
-
-        self._current_value = self._target_value
 
     def max_speed_set(self, value):
         self.device.stepper_set_max_speed(self.motor, value)
