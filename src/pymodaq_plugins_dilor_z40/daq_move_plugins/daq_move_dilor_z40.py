@@ -72,7 +72,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
     def close(self):
         """Terminate the communication protocol"""
         ## TODO for your custom plugin
-        #raise NotImplemented  # when writing your own plugin remove this line
         self.controller.close_communication()  # when writing your own plugin replace this line
 
     def commit_settings(self, param: Parameter):
@@ -137,8 +136,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
 
 
         ## TODO for your custom plugin
-
-        #raise NotImplemented  # when writing your own plugin remove this line
         self.controller.move_at(value)  # when writing your own plugin replace this line
         self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
@@ -164,7 +161,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
 
         ## TODO for your custom plugin
         self.move_abs(0)
-        #raise NotImplemented  # when writing your own plugin remove this line
         #self.controller.move_at(0)  # when writing your own plugin replace this line
         #self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
@@ -174,7 +170,6 @@ class DAQ_Move_dilor_z40(DAQ_Move_base):
 
       ## TODO for your custom plugin
       self.move_abs(0)
-      #raise NotImplemented  # when writing your own plugin remove this line
       #self.controller.your_method_to_stop_positioning()  # when writing your own plugin replace this line
       #self.emit_status(ThreadCommand('Update_Status', ['Some info you want to log']))
 
