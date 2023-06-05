@@ -31,7 +31,7 @@ class PIDModelGrating(PIDModelGeneric):
 
     def ini_model(self):
         super().ini_model()
-        self.pid_controller.modules_manager.get_mod_from_name('Thermometer', 'det').\
+        self.pid_controller.modules_manager.get_mod_from_name('Ruler', 'det').\
             settings.child('main_settings', 'wait_time').setValue(0)
 
     def convert_input(self, measurements):
@@ -46,7 +46,7 @@ class PIDModelGrating(PIDModelGeneric):
         float: the converted input
 
         """
-        self.curr_input = measurements['Thermometer']['data0D']['Thermometer_Boiler_CH000']['data']
+        self.curr_input = measurements['Ruler']['data0D']['Ruler_Grating_CH000']['data']
 
         return InputFromDetector([self.curr_input])
 
